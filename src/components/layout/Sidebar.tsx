@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { FiStar, FiClock, FiList, FiTarget, FiGrid, FiSettings, FiChevronDown, FiChevronRight } from 'react-icons/fi';
+import { FiStar, FiClock, FiList, FiTarget, FiGrid, FiSettings, FiChevronDown, FiChevronRight, FiX } from 'react-icons/fi';
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+    onCloseMobile?: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
     const toggleExpand = (label: string) => {
@@ -13,7 +17,15 @@ const Sidebar: React.FC = () => {
     };
 
     return (
-        <div className="h-screen w-[240px] bg-white border-r border-gray-100 flex flex-col">
+        <div className="h-screen w-[240px] md:w-[240px] bg-white border-r border-gray-100 flex flex-col relative">
+            {/* Close button for mobile */}
+            <button
+                className="md:hidden absolute top-3 right-3 text-gray-500 hover:text-gray-700 z-10"
+                onClick={onCloseMobile}
+            >
+                <FiX size={20} />
+            </button>
+
             {/* Logo */}
             <div className="px-4 py-3 border-b border-gray-100">
                 <div className="flex items-center">
@@ -35,7 +47,7 @@ const Sidebar: React.FC = () => {
                 <div className="mt-4">
                     <NavItem icon={<FiList size={14} />} label="Sales list" />
                     <NavItem icon={<FiTarget size={14} />} label="Goals" />
-                    <NavItem icon={<FiGrid size={14} />} label="Dashboard" />
+                    <NavItem icon={<FiGrid size={14} />} label="Dashboard" active />
                 </div>
 
                 <div className="mt-4">
@@ -114,6 +126,7 @@ interface NavItemProps {
     badge?: string;
     isHighlighted?: boolean;
     indent?: boolean;
+    active?: boolean;
     children?: React.ReactNode;
     onToggle?: () => void;
 }
@@ -126,6 +139,7 @@ const NavItem: React.FC<NavItemProps> = ({
     badge,
     isHighlighted = false,
     indent = false,
+    active = false,
     children,
     onToggle
 }) => {
@@ -133,6 +147,7 @@ const NavItem: React.FC<NavItemProps> = ({
         <>
             <div
                 className={`px-3 py-1.5 mb-0.5 flex items-center justify-between rounded cursor-pointer 
+                    ${active ? 'bg-rose-50 text-rose-500' : ''}
                     ${isHighlighted ? 'text-rose-500' : 'text-gray-600 hover:text-gray-900'}
                     ${indent ? 'pl-9' : ''}`}
                 onClick={onToggle}

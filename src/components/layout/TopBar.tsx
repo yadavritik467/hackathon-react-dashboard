@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiPlus } from 'react-icons/fi';
+import { FiPlus, FiMenu } from 'react-icons/fi';
 import {
     FaUserAstronaut,
     FaUserNinja,
@@ -9,7 +9,11 @@ import {
     FaUserGraduate
 } from 'react-icons/fa';
 
-const TopBar: React.FC = () => {
+interface TopBarProps {
+    onMenuClick?: () => void;
+}
+
+const TopBar: React.FC<TopBarProps> = ({ onMenuClick }) => {
     // Define icon set with associated colors
     const userIcons = [
         { id: '1', icon: FaUserAstronaut, color: 'bg-purple-500' },
@@ -21,8 +25,14 @@ const TopBar: React.FC = () => {
     ];
 
     return (
-        <div className="bg-white border-b border-gray-200 py-2 px-6 flex items-center justify-between">
-            <div className="flex-1 flex items-center space-x-2">
+        <div className="bg-white border-b border-gray-200 py-2 px-3 sm:px-6 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+                <button
+                    className="md:hidden text-gray-500 p-1.5 rounded-md hover:bg-gray-100"
+                    onClick={onMenuClick}
+                >
+                    <FiMenu size={20} />
+                </button>
                 <div className="relative max-w-md">
                     <input
                         type="text"
@@ -43,12 +53,12 @@ const TopBar: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-                <button className="p-1.5 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100">
+                <button className="p-1.5 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 hidden sm:flex">
                     <FiPlus className="h-4 w-4" />
                 </button>
 
                 <div className="flex -space-x-2 overflow-hidden">
-                    {userIcons.map((user) => {
+                    {userIcons.slice(0, 3).map((user) => {
                         const IconComponent = user.icon;
                         return (
                             <div

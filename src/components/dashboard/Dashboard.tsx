@@ -41,18 +41,18 @@ const mockDeals = [
 
 const Dashboard: React.FC = () => {
     return (
-        <div className="px-8 py-6">
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-3xl font-light text-gray-900">Sales Report</h1>
-                <div className="flex items-center gap-3">
+        <div className="px-4 sm:px-6 md:px-8 py-4 sm:py-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-4 sm:mb-6">
+                <h1 className="text-2xl sm:text-3xl font-light text-gray-900">Sales Report</h1>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                     <div className="flex items-center border border-gray-200 rounded-md">
-                        <button className="flex items-center justify-center px-3 py-1.5 text-xs font-medium bg-white text-gray-800">
+                        <button className="flex items-center justify-center px-2 sm:px-3 py-1.5 text-xs font-medium bg-white text-gray-800">
                             Week
                         </button>
-                        <button className="flex items-center justify-center px-3 py-1.5 text-xs font-medium bg-gray-50 text-gray-500">
+                        <button className="flex items-center justify-center px-2 sm:px-3 py-1.5 text-xs font-medium bg-gray-50 text-gray-500">
                             Month
                         </button>
-                        <button className="flex items-center justify-center px-3 py-1.5 text-xs font-medium bg-gray-50 text-gray-500">
+                        <button className="flex items-center justify-center px-2 sm:px-3 py-1.5 text-xs font-medium bg-gray-50 text-gray-500">
                             Year
                         </button>
                     </div>
@@ -69,30 +69,30 @@ const Dashboard: React.FC = () => {
 
             <RevenueSection />
 
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6">
                 <PlatformVisual />
             </div>
 
-            <div className="grid grid-cols-3 gap-6 mt-6">
-                <div className="col-span-2">
-                    <div className="bg-white rounded-lg p-6 shadow-sm h-80">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mt-4 sm:mt-6">
+                <div className="lg:col-span-2">
+                    <div className="bg-white rounded-lg p-3 sm:p-6 shadow-sm h-auto sm:h-80">
                         <SalesChart />
                     </div>
                 </div>
                 <div>
-                    <div className="bg-white rounded-lg p-6 shadow-sm h-80">
+                    <div className="bg-white rounded-lg p-3 sm:p-6 shadow-sm h-auto sm:h-80">
                         <PlatformStats platforms={platformData} />
                     </div>
                 </div>
             </div>
 
-            <div className="grid grid-cols-4 gap-6 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-4 sm:mt-6">
                 {mockDeals.map((deal, index) => (
                     <DealCard key={index} {...deal} />
                 ))}
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6 overflow-x-auto">
                 <SalesTable data={salesData} />
             </div>
         </div>
